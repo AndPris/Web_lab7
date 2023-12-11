@@ -9,7 +9,6 @@
 
 header, footer {
     background-color: rgb(198, 217, 241);
-    flex: 100%;
 }
 
 main {
@@ -59,11 +58,18 @@ header>p{
 	flex: 58%;
     background-color: white;
     display: flex;
-    align-items: flex-end;
-    align-content: space-around;
-    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: flex-end;
 }
-
+.controls {
+	flex: 1;
+	border: 1px solid blue;
+}
+.anim {
+    width: calc(100% - 10px);
+    height: calc(100% - 50px);
+    border: 5px solid orange;
+}
 .section5 {
 	flex: 0;
 	width: 100%;
