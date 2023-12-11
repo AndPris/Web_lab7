@@ -5,16 +5,10 @@ async function createWorkArea() {
 	let controls = document.createElement('section');
 	controls.classList.add('controls');
 
-	let closeBtn = document.createElement('button');
-	closeBtn.textContent = "Close";
-	closeBtn.addEventListener("click", removeWorkArea);
-	controls.append(closeBtn);
+	let closeBtn = createButton("Close", removeWorkArea, controls);
 
-	let startBtn = document.createElement('button');
-	startBtn.textContent = "Start";
+	let startBtn = createButton("Start", startButtonClick, controls);
 	startBtn.setAttribute('id', 'startBtn');
-	startBtn.addEventListener("click", startButtonClick);
-	controls.append(startBtn);
 
 	let anim = document.createElement('canvas');
 	anim.classList.add('anim');
@@ -27,6 +21,14 @@ function removeAllChildren(parentElement) {
     while (parentElement.firstChild) {
  	   parentElement.removeChild(parentElement.firstChild);
     }
+}
+
+function createButton(text, onclickHandler, container) {
+	let button = document.createElement('button');
+	button.textContent = text;
+	button.addEventListener("click", onclickHandler);
+	container.append(button);
+	return button;
 }
 
 function removeWorkArea() {
