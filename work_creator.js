@@ -8,13 +8,11 @@ async function createWorkArea() {
 	controls.classList.add('left-center');
 
 	let messagesContainer = document.createElement('section');
-	messagesContainer.classList.add('messagesContainer');
 
 	let buttonsContainer = document.createElement('section');
-	buttonsContainer.classList.add('buttonsContainer');
 
 	let messagesParagraph = document.createElement('p');
-	messagesParagraph.textContent = "test";
+	messagesParagraph.setAttribute('id', 'messages');
 	messagesContainer.append(messagesParagraph);
 
 	let closeBtn = createButton("Close", removeWorkArea, buttonsContainer);
@@ -70,16 +68,28 @@ function startButtonClick(event) {
 	event.target.style.display = "none";
 	document.getElementById("stopBtn").style.display = "";
 	animation.startAnimation();
+
+	let message = "Start animation";
+	let messagesParagraph = document.getElementById('messages');
+	messagesParagraph.textContent = message;
 }
 
 function stopButtonClick(event) {
 	event.target.style.display = "none";
 	document.getElementById("reloadBtn").style.display = "";
 	animation.stopAnimation();
+
+	let message = "Stop animation";
+	let messagesParagraph = document.getElementById('messages');
+	messagesParagraph.textContent = message;
 }
 
 function reloadButtonClick(event) {
 	event.target.style.display = "none";
 	document.getElementById("startBtn").style.display = "";
 	animation.drawInitialState();
+
+	let message = "Reload animation";
+	let messagesParagraph = document.getElementById('messages');
+	messagesParagraph.textContent = message;
 }
