@@ -45,28 +45,30 @@ class Square {
 	}
 }
 
-let canvas = document.getElementById("anim");
-let context = canvas.getContext("2d");
+function startAnimation() {
+	let canvas = document.getElementById("anim");
+	let context = canvas.getContext("2d");
 
-let square1Size = 10;
-let square2Size = 20;
+	let square1Size = 10;
+	let square2Size = 20;
 
-let square1 = new Square(0, (canvas.height-square1Size)/2, square1Size, "red", 3, 0, canvas);
-let square2 = new Square((canvas.width-square2Size)/2, 0, square2Size, "green", 0, 2, canvas);
+	let square1 = new Square(0, (canvas.height-square1Size)/2, square1Size, "red", 3, 0, canvas);
+	let square2 = new Square((canvas.width-square2Size)/2, 0, square2Size, "green", 0, 2, canvas);
 
-let timer = setInterval(() => {
-	context.clearRect(0, 0, canvas.width, canvas.height);
+	let timer = setInterval(() => {
+		context.clearRect(0, 0, canvas.width, canvas.height);
 
-	square1.draw();
-	square1.move();
-	square1.checkCollisions();
+		square1.draw();
+		square1.move();
+		square1.checkCollisions();
 
-	square2.draw();
-	square2.move();
-	square2.checkCollisions();
+		square2.draw();
+		square2.move();
+		square2.checkCollisions();
 
-	if(square1.collide(square2)) {
-		alert("Collide!");
-		clearInterval(timer);
-	}
-}, 30);
+		if(square1.collide(square2)) {
+			alert("Collide!");
+			clearInterval(timer);
+		}
+	}, 30);
+}
