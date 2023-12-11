@@ -37,6 +37,12 @@ class Square {
 		if(this.#y < 0 || (this.#y+this.#size) > this.#canvas.height)
 			this.#speedY = - this.#speedY;
 	}
+
+	collide(anotherSquare) {
+		return this.#x >= anotherSquare.#x && this.#y >= anotherSquare.#y &&
+				this.#x+this.#size <= anotherSquare.#x+anotherSquare.#size &&
+				this.#y+this.#size <= anotherSquare.#y+anotherSquare.#size;
+	}
 }
 
 let canvas = document.getElementById("anim");
@@ -48,7 +54,7 @@ let square2Size = 20;
 let square1 = new Square(0, (canvas.height-square1Size)/2, square1Size, "red", 3, 0, canvas);
 let square2 = new Square((canvas.width-square2Size)/2, 0, square2Size, "green", 0, 2, canvas);
 
-setInterval(() => {
+let timer = setInterval(() => {
 	context.clearRect(0, 0, canvas.width, canvas.height);
 
 	square1.draw();
@@ -58,4 +64,9 @@ setInterval(() => {
 	square2.draw();
 	square2.move();
 	square2.checkCollisions();
+
+	if(square1.collide(square2)) {
+		alert("Collide!");
+		clearInterval(timer);
+	}
 }, 30);
