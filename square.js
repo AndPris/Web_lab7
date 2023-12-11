@@ -48,7 +48,7 @@ class Square {
 }
 
 function startAnimation() {
-	clearInterval(animationTimer);
+	stopAnimation();
 
 	let canvas = document.getElementById("anim");
 	let context = canvas.getContext("2d");
@@ -87,4 +87,8 @@ function drawTexture(canvas, context, texture) {
     let pattern = context.createPattern(texture, "repeat");
     context.fillStyle = pattern;
     context.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function stopAnimation() {
+	clearInterval(animationTimer);
 }

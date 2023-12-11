@@ -10,6 +10,10 @@ async function createWorkArea() {
 	let startBtn = createButton("Start", startButtonClick, controls);
 	startBtn.setAttribute('id', 'startBtn');
 
+	let stopBtn = createButton("Stop", stopAnimation, controls);
+	stopBtn.setAttribute('id', 'stopBtn');
+	stopBtn.style.display = "none";
+
 	let anim = document.createElement('canvas');
 	anim.classList.add('anim');
 	anim.setAttribute('id', 'anim');
@@ -44,5 +48,6 @@ async function start() {
 
 function startButtonClick(event) {
 	event.target.style.display = "none";
+	document.getElementById("stopBtn").style.display = "";
 	startAnimation();
 }
