@@ -61,13 +61,13 @@ header>p{
     flex-direction: column;
     justify-content: flex-end;
 }
-.controls {
+/*.controls {
 	display: flex;
 	flex: 1;
 	border: 1px solid blue;
 	justify-content: flex-end;
-}
-.controls>button {
+}*/
+.buttonsContainer>button {
 	margin: 8px;
 }
 .anim {

@@ -5,18 +5,28 @@ async function createWorkArea() {
 	removeAllChildren(section);
 
 	let controls = document.createElement('section');
-	controls.classList.add('controls');
+	controls.classList.add('left-center');
 
-	let closeBtn = createButton("Close", removeWorkArea, controls);
+	let messagesContainer = document.createElement('section');
+	messagesContainer.classList.add('messagesContainer');
 
-	let startBtn = createButton("Start", startButtonClick, controls);
+	let buttonsContainer = document.createElement('section');
+	buttonsContainer.classList.add('buttonsContainer');
+
+	let messagesParagraph = document.createElement('p');
+	messagesParagraph.textContent = "test";
+	messagesContainer.append(messagesParagraph);
+
+	let closeBtn = createButton("Close", removeWorkArea, buttonsContainer);
+
+	let startBtn = createButton("Start", startButtonClick, buttonsContainer);
 	startBtn.setAttribute('id', 'startBtn');
 
-	let stopBtn = createButton("Stop", stopButtonClick, controls);
+	let stopBtn = createButton("Stop", stopButtonClick, buttonsContainer);
 	stopBtn.setAttribute('id', 'stopBtn');
 	stopBtn.style.display = "none";
 
-	let reloadBtn = createButton("Reload", reloadButtonClick, controls);
+	let reloadBtn = createButton("Reload", reloadButtonClick, buttonsContainer);
 	reloadBtn.setAttribute('id', 'reloadBtn');
 	reloadBtn.style.display = "none";
 
@@ -24,6 +34,7 @@ async function createWorkArea() {
 	anim.classList.add('anim');
 	anim.setAttribute('id', 'anim');
 
+	controls.append(messagesContainer, buttonsContainer);
 	section.append(controls, anim);
 
 	animation?.stopAnimation();
