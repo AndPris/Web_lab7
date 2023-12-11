@@ -1,3 +1,5 @@
+let timer;
+
 class Square {
 	#x = 0;
 	#y = 0;
@@ -46,6 +48,8 @@ class Square {
 }
 
 function startAnimation() {
+	clearInterval(timer);
+
 	let canvas = document.getElementById("anim");
 	let context = canvas.getContext("2d");
 
@@ -55,7 +59,7 @@ function startAnimation() {
 	let square1 = new Square(0, (canvas.height-square1Size)/2, square1Size, "red", 3, 0, canvas);
 	let square2 = new Square((canvas.width-square2Size)/2, 0, square2Size, "green", 0, 2, canvas);
 
-	let timer = setInterval(() => {
+	timer = setInterval(() => {
 		context.clearRect(0, 0, canvas.width, canvas.height);
 
 		square1.draw();
