@@ -53,6 +53,10 @@ function startAnimation() {
 	let canvas = document.getElementById("anim");
 	let context = canvas.getContext("2d");
 
+	let texture = new Image();
+	texture.src = "texture.jpg";
+	texture.onload = () => {drawTexture(canvas, context, texture);};
+
 	let square1Size = 10;
 	let square2Size = 20;
 
@@ -61,7 +65,9 @@ function startAnimation() {
 
 	animationTimer = setInterval(() => {
 		context.clearRect(0, 0, canvas.width, canvas.height);
-
+		
+		drawTexture(canvas, context, texture)		
+		
 		square1.draw();
 		square1.move();
 		square1.checkCollisions();
@@ -75,4 +81,10 @@ function startAnimation() {
 			clearInterval(animationTimer);
 		}
 	}, 30);
+}
+
+function drawTexture(canvas, context, texture) {
+    let pattern = context.createPattern(texture, "repeat");
+    context.fillStyle = pattern;
+    context.fillRect(0, 0, canvas.width, canvas.height);
 }
