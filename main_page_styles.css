@@ -62,8 +62,11 @@ header>p{
     justify-content: flex-end;
 }
 .controls {
+	display: flex;
 	flex: 1;
 	border: 1px solid blue;
+	justify-content: flex-end;
+	padding: 8px;
 }
 .anim {
     width: calc(100% - 10px);
