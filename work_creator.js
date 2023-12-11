@@ -1,3 +1,5 @@
+let animation;
+
 async function createWorkArea() {
 	let section = document.querySelector('.section3');
 	removeAllChildren(section);
@@ -10,15 +12,22 @@ async function createWorkArea() {
 	let startBtn = createButton("Start", startButtonClick, controls);
 	startBtn.setAttribute('id', 'startBtn');
 
-	let stopBtn = createButton("Stop", stopAnimation, controls);
+	let stopBtn = createButton("Stop", stopButtonClick, controls);
 	stopBtn.setAttribute('id', 'stopBtn');
 	stopBtn.style.display = "none";
+
+	let reloadBtn = createButton("Reload", reloadButtonClick, controls);
+	reloadBtn.setAttribute('id', 'reloadBtn');
+	reloadBtn.style.display = "none";
 
 	let anim = document.createElement('canvas');
 	anim.classList.add('anim');
 	anim.setAttribute('id', 'anim');
 
 	section.append(controls, anim);
+
+	animation?.stopAnimation();
+	animation = new Animation();
 }
 
 function removeAllChildren(parentElement) {
@@ -38,7 +47,7 @@ function createButton(text, onclickHandler, container) {
 function removeWorkArea() {
 	let section = document.querySelector('.section3');
 	removeAllChildren(section);
-	clearInterval(animationTimer);
+	animation.stopAnimation();
 }
 
 async function start() {
@@ -49,5 +58,17 @@ async function start() {
 function startButtonClick(event) {
 	event.target.style.display = "none";
 	document.getElementById("stopBtn").style.display = "";
-	startAnimation();
+	animation.startAnimation();
+}
+
+function stopButtonClick(event) {
+	event.target.style.display = "none";
+	document.getElementById("reloadBtn").style.display = "";
+	animation.stopAnimation();
+}
+
+function reloadButtonClick(event) {
+	event.target.style.display = "none";
+	document.getElementById("startBtn").style.display = "";
+	animation.drawInitialState();
 }
