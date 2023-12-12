@@ -62,6 +62,16 @@ function removeWorkArea() {
 async function start() {
 	let promise = createWorkArea();
 	let result = await promise;
+
+	let response = await fetch('clear_db.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+	let data = await response.text();
+	console.log(data);
+	messageNumber = 1; 
 }
 
 function startButtonClick(event) {
@@ -69,7 +79,9 @@ function startButtonClick(event) {
 	document.getElementById("stopBtn").style.display = "";
 	animation.startAnimation();
 
-	displayMessage("Start animation");
+	let message = "Start animation";
+	displayMessage(message);
+	saveMessageInDB(message);
 }
 
 function stopButtonClick(event) {
@@ -77,7 +89,9 @@ function stopButtonClick(event) {
 	document.getElementById("reloadBtn").style.display = "";
 	animation.stopAnimation();
 
-	displayMessage("Stop animation");
+	let message = "Stop animation";
+	displayMessage(message);
+	saveMessageInDB(message);
 }
 
 function reloadButtonClick(event) {
@@ -85,5 +99,7 @@ function reloadButtonClick(event) {
 	document.getElementById("startBtn").style.display = "";
 	animation.drawInitialState();
 
-	displayMessage("Reload animation");
+	let message = "Reload animation";
+	displayMessage(message);
+	saveMessageInDB(message);
 }

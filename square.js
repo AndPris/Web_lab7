@@ -1,3 +1,5 @@
+let messageNumber = 1;
+
 class Square {
 	#x = 0;
 	#y = 0;
@@ -164,4 +166,22 @@ class Animation {
 function displayMessage(message) {
 	let messagesParagraph = document.getElementById('messages');
 	messagesParagraph.textContent = message;
+}
+
+async function saveMessageInDB(messageToSave) {
+	let dataToSave = {
+		message : messageToSave,
+		number : messageNumber
+	}
+	messageNumber++;
+
+	let response = await fetch('save_data.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataToSave)
+            });
+	let data = await response.text();
+	console.log(data);
 }
