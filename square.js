@@ -224,3 +224,25 @@ function getCurrentDateAndTime() {
 	let formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
 	return formattedDateTime;
 }
+
+async function saveDataFromLocalStorageIntoDB() {
+	let localStorageData = [];
+
+	for(let i = 0; i < localStorage.length; i++) {
+		let key = localStorage.key(i);
+		let value = localStorage.getItem(key);
+
+		let parsedValue = JSON.parse(value);
+		localStorageData.push(parsedValue);
+	}
+
+	let response = await fetch('save_data_from_local_storage.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({data: localStorageData})
+            });
+	let data = await response.text();
+	console.log(data);
+}

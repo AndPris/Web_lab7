@@ -57,6 +57,7 @@ function removeWorkArea() {
 	let section = document.querySelector('.section3');
 	removeAllChildren(section);
 	animation.stopAnimation();
+	saveDataFromLocalStorageIntoDB();
 }
 
 async function start() {
