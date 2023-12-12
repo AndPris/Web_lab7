@@ -3,7 +3,9 @@ let animation;
 async function createWorkArea() {
 	let section = document.querySelector('.section3');
 	removeAllChildren(section);
-
+	section.classList.toggle("anim_container");
+	section.classList.toggle("images_container");
+	
 	let controls = document.createElement('section');
 	controls.classList.add('left-center');
 
@@ -59,6 +61,16 @@ async function removeWorkArea() {
 	animation.stopAnimation();
 	let response = await saveDataFromLocalStorageIntoDB();
 	createMessagesTable();
+
+	section.innerHTML = `<img src="icon1.jpg" class="preview_img" alt="Iron Maiden">
+
+						<img src="icon2.jpg" class="preview_img" alt="The Number of the Beast">
+						
+						<img src="icon.jpg" class="preview_img" alt="Fear of the Dark">
+						
+						<img src="icon4.jpg" class="preview_img" alt="Brave New World">	`;
+	section.classList.toggle("anim_container");
+	section.classList.toggle("images_container");
 }
 
 async function start() {

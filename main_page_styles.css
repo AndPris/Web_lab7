@@ -51,17 +51,28 @@ header>p{
 	display: flex;
 }
 .section2 {
-	flex: 21%;
+	flex: 44%;
 	background-color: rgb(253, 233, 217);
 }
-.section3 {
-	flex: 79%;
-    background-color: white;
-    display: flex;
+.anim_container {
     flex-direction: column;
     justify-content: flex-end;
 }
-
+.section3 {
+	flex: 56%;
+    background-color: white;
+    display: flex;
+}
+.images_container {
+	align-items: flex-end;
+    align-content: space-around;
+    flex-wrap: wrap;
+}
+.preview_img{
+	margin-left: auto;
+	max-width: 100%;
+	max-height: 300px;
+}
 .left-center>section>button {
 	margin: 8px;
 }
