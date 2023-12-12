@@ -246,3 +246,72 @@ async function saveDataFromLocalStorageIntoDB() {
 	let data = await response.text();
 	console.log(data);
 }
+
+async function createMessagesTable() {
+	createFirstRow();
+
+	let response = await fetch('get_data.php');
+	let data = await response.json();
+
+	for(let i = 0; i < data.length; i++)
+		addRow(data[i]);
+}
+
+function createFirstRow() {
+	let table = document.createElement('table');
+	table.setAttribute('id', 'messagesTable');
+
+	let firstRow = document.createElement('tr');
+
+	let numberHeader = document.createElement('th');
+	numberHeader.textContent = "Number";
+	firstRow.append(numberHeader);
+
+	let DBDateHeader = document.createElement('th');
+	DBDateHeader.textContent = "DB Date";
+	firstRow.append(DBDateHeader);
+
+	let localStorageDateHeader = document.createElement('th');
+	localStorageDateHeader.textContent = "Local Storage Date";
+	firstRow.append(localStorageDateHeader);
+
+	let messageHeader = document.createElement('th');
+	messageHeader.textContent = "Message";
+	firstRow.append(messageHeader);
+
+	table.append(firstRow);
+
+	let section = document.querySelector('.section4');
+	section.append(table);
+}
+
+function addRow(data) {
+	let table = document.getElementById('messagesTable');
+
+	let row = document.createElement('tr');
+
+	let numberData = document.createElement('td');
+	numberData.textContent = data.number;
+	row.append(numberData);
+
+	let DBDateData = document.createElement('td');
+	DBDateData.textContent = data.date;
+	row.append(DBDateData);
+
+	let localStorageDateData = document.createElement('td');
+	localStorageDateData.textContent = data.localStorageDate;
+	row.append(localStorageDateData);
+
+	let messageData = document.createElement('td');
+	messageData.textContent = data.message;
+	row.append(messageData);
+
+	table.append(row);
+}
+
+function removeMessagesTable() {
+	let table = document.getElementById('messagesTable');
+
+	if(table)
+		table.remove();
+}

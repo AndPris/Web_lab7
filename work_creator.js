@@ -53,11 +53,12 @@ function createButton(text, onclickHandler, container) {
 	return button;
 }
 
-function removeWorkArea() {
+async function removeWorkArea() {
 	let section = document.querySelector('.section3');
 	removeAllChildren(section);
 	animation.stopAnimation();
-	saveDataFromLocalStorageIntoDB();
+	let response = await saveDataFromLocalStorageIntoDB();
+	createMessagesTable();
 }
 
 async function start() {
@@ -74,6 +75,7 @@ async function start() {
 	console.log(data);
 	messageNumber = 1; 
 	localStorage.clear();
+	removeMessagesTable();
 }
 
 function startButtonClick(event) {
