@@ -162,6 +162,8 @@ class Animation {
 				saveMessageInLocalStorage(message);
 				saveMessageInDB(message);
 				this.stopAnimation();
+				document.getElementById('stopBtn').style.display = "none";
+				document.getElementById('reloadBtn').style.display = "";
 			}
 		}, 30);
 	}
