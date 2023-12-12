@@ -54,8 +54,8 @@ class Square {
 
 	collide(anotherSquare) {
 		return this.#x >= anotherSquare.#x && this.#y >= anotherSquare.#y &&
-				this.#x+this.#size <= anotherSquare.#x+anotherSquare.#size &&
-				this.#y+this.#size <= anotherSquare.#y+anotherSquare.#size;
+				this.#x+this.#size < anotherSquare.#x+anotherSquare.#size &&
+				this.#y+this.#size < anotherSquare.#y+anotherSquare.#size;
 	}
 
 	setCoords(x, y) {
@@ -147,14 +147,14 @@ class Animation {
 			this.clearContext();
 
 			this.drawTexture();	
-			
-			this.#square1.draw();
-			this.#square1.move();
-			this.#square1.checkCollisions();
 
 			this.#square2.draw();
 			this.#square2.move();
 			this.#square2.checkCollisions();
+
+			this.#square1.draw();
+			this.#square1.move();
+			this.#square1.checkCollisions();
 
 			if(this.#square1.collide(this.#square2)) {
 				let message = "Collide!";
