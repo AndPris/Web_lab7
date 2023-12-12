@@ -72,6 +72,7 @@ async function start() {
 	let data = await response.text();
 	console.log(data);
 	messageNumber = 1; 
+	localStorage.clear();
 }
 
 function startButtonClick(event) {
@@ -81,6 +82,7 @@ function startButtonClick(event) {
 
 	let message = "Start animation";
 	displayMessage(message);
+	saveMessageInLocalStorage(message);
 	saveMessageInDB(message);
 }
 
@@ -91,6 +93,7 @@ function stopButtonClick(event) {
 
 	let message = "Stop animation";
 	displayMessage(message);
+	saveMessageInLocalStorage(message);
 	saveMessageInDB(message);
 }
 
@@ -101,5 +104,6 @@ function reloadButtonClick(event) {
 
 	let message = "Reload animation";
 	displayMessage(message);
+	saveMessageInLocalStorage(message);
 	saveMessageInDB(message);
 }

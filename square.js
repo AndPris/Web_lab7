@@ -32,6 +32,7 @@ class Square {
 
 		let message = this.#color + " square moved";
 		displayMessage(message);
+		saveMessageInLocalStorage(message);
 		saveMessageInDB(message);
 	}
 
@@ -40,11 +41,13 @@ class Square {
 		if(this.#x < 0 || (this.#x+this.#size) > this.#canvas.width) {
 			this.#speedX = - this.#speedX;
 			displayMessage(message);
+			saveMessageInLocalStorage(message);
 			saveMessageInDB(message);
 		}
 		if(this.#y < 0 || (this.#y+this.#size) > this.#canvas.height) {
 			this.#speedY = - this.#speedY;
 			displayMessage(message);
+			saveMessageInLocalStorage(message);
 			saveMessageInDB(message);
 		}
 	}
@@ -156,6 +159,7 @@ class Animation {
 			if(this.#square1.collide(this.#square2)) {
 				let message = "Collide!";
 				displayMessage(message);
+				saveMessageInLocalStorage(message);
 				saveMessageInDB(message);
 				this.stopAnimation();
 			}
@@ -192,4 +196,31 @@ async function saveMessageInDB(messageToSave) {
             });
 	let data = await response.text();
 	console.log(data);
+}
+
+function saveMessageInLocalStorage(messageToSave) {
+	let currentDateAndTime = getCurrentDateAndTime();
+	
+	let dataToSave = {
+		message : messageToSave,
+		number : messageNumber,
+		date: currentDateAndTime
+	}
+
+	let jsonData = JSON.stringify(dataToSave);
+	localStorage.setItem([messageNumber], jsonData);
+}
+
+function getCurrentDateAndTime() {
+	let currentDate = new Date();
+
+	let year = currentDate.getFullYear();
+	let month = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Months are zero-based
+	let day = ('0' + currentDate.getDate()).slice(-2);
+	let hours = ('0' + currentDate.getHours()).slice(-2);
+	let minutes = ('0' + currentDate.getMinutes()).slice(-2);
+	let seconds = ('0' + currentDate.getSeconds()).slice(-2);
+
+	let formattedDateTime = year + '-' + month + '-' + day + ' ' + hours + ':' + minutes + ':' + seconds;
+	return formattedDateTime;
 }
