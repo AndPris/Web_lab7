@@ -29,17 +29,23 @@ class Square {
 	move() {
 		this.#x += this.#speedX;
 		this.#y += this.#speedY;
-		displayMessage(this.#color + " square moved");
+
+		let message = this.#color + " square moved";
+		displayMessage(message);
+		saveMessageInDB(message);
 	}
 
 	checkCollisions() {
+		let message = this.#color + " square touched border";
 		if(this.#x < 0 || (this.#x+this.#size) > this.#canvas.width) {
 			this.#speedX = - this.#speedX;
-			displayMessage(this.#color + " square touched border");
+			displayMessage(message);
+			saveMessageInDB(message);
 		}
 		if(this.#y < 0 || (this.#y+this.#size) > this.#canvas.height) {
 			this.#speedY = - this.#speedY;
-			displayMessage(this.#color + " square touched border");
+			displayMessage(message);
+			saveMessageInDB(message);
 		}
 	}
 
@@ -90,7 +96,7 @@ class Animation {
 		this.#square1Size = 10;
 		this.#square1X = 0;
 		this.#square1Y = (this.#canvas.height-this.#square1Size)/2;
-		this.#square1SpeedX = 3;
+		this.#square1SpeedX = 4;
 		this.#square1SpeedY = 0;
 		this.#square1Color = "red";
 
@@ -98,7 +104,7 @@ class Animation {
 		this.#square2X = (this.#canvas.width-this.#square2Size)/2;
 		this.#square2Y = 0;
 		this.#square2SpeedX = 0;
-		this.#square2SpeedY = 2;
+		this.#square2SpeedY = 3;
 		this.#square2Color = "green";
 
 		this.#square1 = new Square(this.#square1X, this.#square1Y, this.#square1Size, this.#square1Color, this.#square1SpeedX, this.#square1SpeedY, this.#canvas);
@@ -148,7 +154,9 @@ class Animation {
 			this.#square2.checkCollisions();
 
 			if(this.#square1.collide(this.#square2)) {
-				displayMessage("Collide!");
+				let message = "Collide!";
+				displayMessage(message);
+				saveMessageInDB(message);
 				this.stopAnimation();
 			}
 		}, 30);
