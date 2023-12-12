@@ -27,13 +27,18 @@ class Square {
 	move() {
 		this.#x += this.#speedX;
 		this.#y += this.#speedY;
+		displayMessage(this.#color + " square moved");
 	}
 
 	checkCollisions() {
-		if(this.#x < 0 || (this.#x+this.#size) > this.#canvas.width)
+		if(this.#x < 0 || (this.#x+this.#size) > this.#canvas.width) {
 			this.#speedX = - this.#speedX;
-		if(this.#y < 0 || (this.#y+this.#size) > this.#canvas.height)
+			displayMessage(this.#color + " square touched border");
+		}
+		if(this.#y < 0 || (this.#y+this.#size) > this.#canvas.height) {
 			this.#speedY = - this.#speedY;
+			displayMessage(this.#color + " square touched border");
+		}
 	}
 
 	collide(anotherSquare) {
@@ -66,6 +71,7 @@ class Animation {
 	#square1Y;
 	#square1SpeedX;
 	#square1SpeedY;
+	#square1Color;
 
 	#square2;
 	#square2Size;
@@ -73,6 +79,7 @@ class Animation {
 	#square2Y;
 	#square2SpeedX;
 	#square2SpeedY;
+	#square2Color;
 
 	constructor() {
 		this.#canvas = document.getElementById("anim");
@@ -83,15 +90,17 @@ class Animation {
 		this.#square1Y = (this.#canvas.height-this.#square1Size)/2;
 		this.#square1SpeedX = 3;
 		this.#square1SpeedY = 0;
+		this.#square1Color = "red";
 
 		this.#square2Size = 20;
 		this.#square2X = (this.#canvas.width-this.#square2Size)/2;
 		this.#square2Y = 0;
 		this.#square2SpeedX = 0;
 		this.#square2SpeedY = 2;
+		this.#square2Color = "green";
 
-		this.#square1 = new Square(this.#square1X, this.#square1Y, this.#square1Size, "red", this.#square1SpeedX, this.#square1SpeedY, this.#canvas);
-		this.#square2 = new Square(this.#square2X, this.#square2Y, this.#square2Size, "green", this.#square2SpeedX, this.#square2SpeedY, this.#canvas);
+		this.#square1 = new Square(this.#square1X, this.#square1Y, this.#square1Size, this.#square1Color, this.#square1SpeedX, this.#square1SpeedY, this.#canvas);
+		this.#square2 = new Square(this.#square2X, this.#square2Y, this.#square2Size, this.#square2Color, this.#square2SpeedX, this.#square2SpeedY, this.#canvas);
 
 		this.#texture = new Image();
 		this.#texture.src = "texture.jpg";
@@ -137,7 +146,7 @@ class Animation {
 			this.#square2.checkCollisions();
 
 			if(this.#square1.collide(this.#square2)) {
-				alert("Collide!");
+				displayMessage("Collide!");
 				this.stopAnimation();
 			}
 		}, 30);
@@ -150,4 +159,9 @@ class Animation {
 	stopAnimation() {
 		clearInterval(this.#animationTimer);
 	}
+}
+
+function displayMessage(message) {
+	let messagesParagraph = document.getElementById('messages');
+	messagesParagraph.textContent = message;
 }

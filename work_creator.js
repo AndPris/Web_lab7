@@ -69,9 +69,7 @@ function startButtonClick(event) {
 	document.getElementById("stopBtn").style.display = "";
 	animation.startAnimation();
 
-	let message = "Start animation";
-	let messagesParagraph = document.getElementById('messages');
-	messagesParagraph.textContent = message;
+	displayMessage("Start animation");
 }
 
 function stopButtonClick(event) {
@@ -79,9 +77,7 @@ function stopButtonClick(event) {
 	document.getElementById("reloadBtn").style.display = "";
 	animation.stopAnimation();
 
-	let message = "Stop animation";
-	let messagesParagraph = document.getElementById('messages');
-	messagesParagraph.textContent = message;
+	displayMessage("Stop animation");
 }
 
 function reloadButtonClick(event) {
@@ -89,7 +85,5 @@ function reloadButtonClick(event) {
 	document.getElementById("startBtn").style.display = "";
 	animation.drawInitialState();
 
-	let message = "Reload animation";
-	let messagesParagraph = document.getElementById('messages');
-	messagesParagraph.textContent = message;
+	displayMessage("Reload animation");
 }
