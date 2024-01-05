@@ -1,5 +1,8 @@
 <?php 
-	$conn = new mysqli("sql107.infinityfree.com", "if0_35604074", "WLINGKsA6eWB", "if0_35604074_lab7DB");
+	require_once 'config.php';
+
+	$conn = new mysqli(HOST_NAME, USER_NAME, PASSWORD, DATABASE);
+	
 	if ($conn->connect_error)
     	die("Connection failed: " . $conn->connect_error);
     
